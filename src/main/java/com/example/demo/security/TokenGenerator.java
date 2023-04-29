@@ -3,8 +3,6 @@ package com.example.demo.security;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import lombok.Data;
-import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
@@ -20,7 +18,7 @@ public class TokenGenerator {
         Date expDate = new Date(currentDate.getTime() + 1234);
 
         String token = Jwts.builder().setSubject(username).setIssuedAt(currentDate)
-                .setExpiration(expDate).signWith(SignatureAlgorithm.ES512, "jwtSecret").compact();
+                .setExpiration(expDate).signWith(SignatureAlgorithm.HS512, "jwtSecret").compact();
 
         return token;
     }

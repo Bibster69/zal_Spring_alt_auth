@@ -57,8 +57,7 @@ public class BookService implements IBookService{
         book.setTitle(bookDTO.getTitle());
         book.setDescription(bookDTO.getDescription());
         book.setPrice(bookDTO.getPrice());
-
-        Book updatedBook = bookRepository.save(book);
+        bookRepository.save(book);
 
         return mapToDTO(book);
     }
@@ -77,15 +76,5 @@ public class BookService implements IBookService{
         bookDTO.setPrice(book.getPrice());
 
         return bookDTO;
-    }
-
-    private Book mapToObject(BookDTO bookDTO){
-        Book book = new Book();
-        book.setId(bookDTO.getId());
-        book.setTitle(bookDTO.getTitle());
-        book.setDescription(bookDTO.getDescription());
-        book.setPrice(bookDTO.getPrice());
-
-        return book;
     }
 }
