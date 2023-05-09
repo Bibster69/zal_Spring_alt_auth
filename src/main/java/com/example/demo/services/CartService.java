@@ -17,9 +17,11 @@ public class CartService implements ICartService{
     private BookRepository bookRepository;
 
     @Autowired
-    public CartService(CartRepository cartRepository) {
+    public CartService(CartRepository cartRepository, BookRepository bookRepository) {
         this.cartRepository = cartRepository;
+        this.bookRepository = bookRepository;
     }
+
 
     @Override
     public CartDTO createCart(CartDTO cartDTO){
