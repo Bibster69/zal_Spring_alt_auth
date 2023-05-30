@@ -5,6 +5,8 @@ import com.example.demo.services.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -30,16 +32,14 @@ public class BookController {
     }
 
     @PostMapping("book/create")
+    //@PreAuthorize("hasRole('admin')")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<BookDTO> createBook(@RequestBody BookDTO bookdto){
-//        System.out.println(bookdto.getId());
-//        System.out.println(bookdto.getTitle());
-//        System.out.println(bookdto.getDescription());
-//        System.out.println(bookdto.getPrice());
         return new ResponseEntity<>(bookService.createBook(bookdto), HttpStatus.CREATED);
     }
 
     @PutMapping("book/update/{id}")
+    //@PreAuthorize("hasRole('admin')")
     public ResponseEntity<BookDTO> updateBook(@RequestBody BookDTO bookDTO,
                                            @PathVariable("id") int id){
         BookDTO response = bookService.updateBook(bookDTO, id);
@@ -47,6 +47,7 @@ public class BookController {
     }
 
     @DeleteMapping("book/delete/{id}")
+    //@PreAuthorize("hasRole('admin')")
     public ResponseEntity<String> deleteBook(@PathVariable("id") int id){
         bookService.deleteBook(id);
         return ResponseEntity.ok("Book deleted");
